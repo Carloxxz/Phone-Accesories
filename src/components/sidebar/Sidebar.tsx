@@ -7,7 +7,6 @@ import { MdOutlineMail } from 'react-icons/md';
 
 type isOpenPorps = {
     isOpen: boolean
-    toggleSidebar: () => void
 }
 
 const menuItem = [
