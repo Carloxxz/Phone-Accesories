@@ -7,7 +7,7 @@ export default function HeadphonesPage() {
             <section className="bg-red-400">
                 <HeadContent
                 title="Headphones"
-                description="Página de prueba para los audifonos"
+                description="Prototipo de página web para audifonos"
                 image={`esto es una imagen de prueba`}
                 />
             </section>
