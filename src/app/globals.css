@@ -23,3 +23,9 @@ body {
     text-wrap: balance;
   }
 }
+
+.border-gradient-blue-purple {
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #3B82F6, #9333EA) 1;
+}

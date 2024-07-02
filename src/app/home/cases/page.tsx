@@ -7,7 +7,7 @@ export default function HomePage() {
             <section className="bg-red-400">
                 <HeadContent
                     title="Cases"
-                    description="Página de prueba para los cases de los celulares"
+                    description="Prototipo de página web para fundas de teléfonos"
                     image={`esto es una imagen de prueba`}
                 />
             </section>

@@ -7,7 +7,7 @@ export default function AccesoriesPage() {
       <section className="bg-red-400">
       <HeadContent
                 title="Accesories"
-                description="Página de prueba para los accesorios"
+                description="Prototipo de página web para accesorios de teléfonos"
                 image={`esto es una imagen de prueba`}
                 />
       </section>
