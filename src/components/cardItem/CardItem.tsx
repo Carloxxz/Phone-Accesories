@@ -8,12 +8,16 @@ interface Product {
 }
 
 interface CardItemProps {
-  product?: Product; 
+  product?: Product;
 }
 
 export const CardItem = ({ product }: CardItemProps) => {
   if (!product) {
-    return null; 
+    return (
+      <div>
+        <h1>No hay productos</h1>
+      </div>
+    );
   }
 
   return (
