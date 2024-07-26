@@ -1,24 +1,28 @@
 // src/app/home/cases/page.tsx
+'use client';
 
-"use client";
+import { useState, useEffect } from 'react';
+import { CardItem } from '@/components/CardItem';
+import { HeadContent } from '@/components/Head';
+import { getProducts } from '@/actions/prisma-actions';
 
-import { CardItem } from "@/components/CardItem";
-import { HeadContent } from "@/components/Head";
-import { useEffect, useState } from "react";
+// Define el tipo de producto
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+}
 
 export default function HomePage() {
-  const [products, setProducts] = useState([]);
+  // Especifica el tipo de estado
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('/api/products');
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
+    async function fetchProducts() {
+      const result = await getProducts();
+      setProducts(result);
+    }
 
     fetchProducts();
   }, []);
@@ -29,14 +33,18 @@ export default function HomePage() {
         <HeadContent
           title="Cases"
           description="Prototipo de página web para fundas de teléfonos"
-          image={`esto es una imagen de prueba`}
+          image="esto es una imagen de prueba"
         />
       </section>
 
       <section className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-        {products.map((product) => (
-          <CardItem key={product.id} product={product} />
-        ))}
+        {products.length > 0 ? (
+          products.map((product) => (
+            <CardItem key={product.id} product={product} />
+          ))
+        ) : (
+          <h1>No hay productos</h1>
+        )}
       </section>
     </div>
   );
