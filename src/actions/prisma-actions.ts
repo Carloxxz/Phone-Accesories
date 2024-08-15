@@ -1,4 +1,4 @@
-// src/actions/prisma-actions.js
+// src/actions/prisma-actions.ts
 "use server"
 
 import { PrismaClient } from '@prisma/client';
@@ -29,7 +29,7 @@ export async function createProduct(data) {
     }
 }
 
-export async function updateProduct(id, data) {
+export async function updateProduct(id: number, data: Partial<Product>) {
     try {
         const product = await prisma.product.update({
             where: { id },
@@ -43,7 +43,7 @@ export async function updateProduct(id, data) {
     }
 }
 
-export async function deleteProduct(id) {
+export async function deleteProduct(id: number) {
     try {
         await prisma.product.delete({ where: { id } });
         revalidatePath('/home/cases');
