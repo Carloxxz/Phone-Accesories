@@ -24,21 +24,26 @@ const useFilteredProducts = (initialFilters: FilterOptions) => {
 
     useEffect(() => {
         async function fetchAndFilterProducts() {
-            let result = await getProducts();
+            const allProducts = await getProducts();
 
-            const filterFunctions: Record<keyof FilterOptions, () => void> = {
-                sortByPriceAsc: () => result.sort((a, b) => a.price - b.price),
-                sortByPriceDesc: () => result.sort((a, b) => b.price - a.price),
-                inStock: () => result = result.filter(product => product.stock > 0),
-                iPhones: () => result = result.filter(product => product.name.toLowerCase().includes('iphone')),
-                android: () => result = result.filter(product => product.name.toLowerCase().includes('android')),
-            };
+            let filteredProducts = [...allProducts];
 
-            Object.entries(filters).forEach(([key, value]) => {
-                if (value) filterFunctions[key as keyof FilterOptions]?.();
-            });
 
-            setProducts(result);
+            const filterFunctions = [
+                filters.sortByPriceAsc ? (arr: Product[]) => [...arr].sort((a, b) => a.price - b.price) : null,
+                filters.sortByPriceDesc ? (arr: Product[]) => [...arr].sort((a, b) => b.price - a.price) : null,
+                filters.inStock ? (arr: Product[]) => arr.filter(product => product.stock > 0) : null,
+                filters.iPhones ? (arr: Product[]) => arr.filter(product => product.name.toLowerCase().includes('iphone')) : null,
+                filters.android ? (arr: Product[]) => arr.filter(product => product.name.toLowerCase().includes('android')) : null,
+            ];
+
+            for (const filterFunction of filterFunctions) {
+                if (filterFunction) {
+                    filteredProducts = filterFunction(filteredProducts);
+                }
+            }
+
+            setProducts(filteredProducts);
         }
 
         fetchAndFilterProducts();
