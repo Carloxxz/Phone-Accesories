@@ -2,8 +2,8 @@ import React from 'react';
 import { CiMenuBurger, CiSearch } from 'react-icons/ci';
 
 type TopMenuProps = {
-    toggleSidebar: () => void
-}
+    toggleSidebar: () => void;
+};
 
 export const TopMenu = ({ toggleSidebar }: TopMenuProps) => {
     return (
