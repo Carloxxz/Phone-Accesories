@@ -14,7 +14,6 @@ type SidebarProps = {
 
 export const Sidebar = ({ isOpen = false, menuItems = [] }: SidebarProps) => {
     const hasMenuItems = menuItems.length > 0;
-    console.log(menuItems)
     return (
         <aside className={`fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition-transform duration-300 md:w-4/12 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] ${isOpen ? 'transform-none' : '-translate-x-full lg:translate-x-0'}`}>
             <div className='flex flex-col h-full'>

@@ -10,7 +10,7 @@ interface Product {
     stock: number;
 }
 
-type FilterOptions = {
+export type FilterOptions = {
     sortByPriceAsc: boolean;
     sortByPriceDesc: boolean;
     inStock: boolean;
@@ -25,7 +25,6 @@ const useFilteredProducts = (initialFilters: FilterOptions) => {
     useEffect(() => {
         async function fetchAndFilterProducts() {
             const allProducts = await getProducts();
-
             let filteredProducts = [...allProducts];
 
 

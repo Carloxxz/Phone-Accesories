@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import { CardItem } from '@/components/CardItem';
-import { HeadContent } from '@/components/Head';
+import { CardItem } from '@/components/cardItem';
+import { HeadContent } from '@/components/head';
 import useFilteredProducts from '@/hooks/useFilteredProducts';
+import { FilterBar } from '@/components/filtros';
 
 export default function HomePage() {
   const initialFilters = {
@@ -18,7 +19,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="bg-red-400">
+      <section className=" shadow-md rounded-md">
         <HeadContent
           title="Cases"
           description="Prototipo de página web para fundas de teléfonos"
@@ -26,25 +27,16 @@ export default function HomePage() {
         />
       </section>
 
-      <select
-        className="block w-full p-2 text-black bg-white border border-gray-300 rounded"
-        onChange={(e) => toggleFilter(e.target.value as keyof typeof filters)}
-      >
-        <option value="sortByPriceAsc">Menor Precio</option>
-        <option value="sortByPriceDesc">Mayor Precio</option>
-        <option value="inStock">En Stock</option>
-        <option value="iPhones">iPhones</option>
-        <option value="android">Android</option>
-      </select>
+      <FilterBar toggleFilter={toggleFilter} filters={filters} />
 
       <section className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-        {products.length > 0 ? (
-          products.map(product => (
-            <CardItem key={product.id} product={product} />
-          ))
-        ) : (
-          <h1>No hay productos</h1>
-        )}
+        {
+          products.length > 0
+            ? products.map(product => (
+              <CardItem key={product.id} product={product} />
+            ))
+            : (<h1>No hay productos</h1>)
+        }
       </section>
     </div>
   );

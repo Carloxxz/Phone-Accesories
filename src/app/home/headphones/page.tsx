@@ -1,26 +1,41 @@
-import { CardItem } from "@/components/CardItem";
-import { HeadContent } from "@/components/Head";
+'use client'
 
-const products = [
-  { name: "Apple AirPods", price: 95.00, stock: 10 },
-  { name: "Samsung Galaxy Buds", price: 80.00, stock: 15 },
-];
+import { CardItem } from "@/components/cardItem";
+import { FilterBar } from "@/components/filtros";
+import { HeadContent } from "@/components/head";
+import useFilteredProducts from "@/hooks/useFilteredProducts";
 
 export default function HeadphonesPage() {
+
+  const initialFilters = {
+    sortByPriceAsc: false,
+    sortByPriceDesc: false,
+    inStock: false,
+    iPhones: false,
+    android: false,
+  };
+
+  const { products, filters, toggleFilter } = useFilteredProducts(initialFilters);
   return (
     <div>
-      <section className="bg-red-400">
+      <section className=" shadow-md rounded-md">
         <HeadContent
-          title="Headphones"
-          description="Prototipo de página web para auriculares"
-          image={`esto es una imagen de prueba`}
+          title="HeadPhones"
+          description="Prototipo de página web para fundas de teléfonos"
+          image="esto es una imagen de prueba"
         />
       </section>
 
+      <FilterBar toggleFilter={toggleFilter} filters={filters} />
+
       <section className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-        {products.map((product, index) => (
-          <CardItem key={index} product={product} />
-        ))}
+        {
+          products.length > 0
+            ? products.map(product => (
+              <CardItem key={product.id} product={product} />
+            ))
+            : (<h1>No hay productos</h1>)
+        }
       </section>
     </div>
   );
